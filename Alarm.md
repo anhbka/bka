@@ -1,4 +1,18 @@
 # Tạo cảnh báo alarm và đẩy ra ngoài ứng dụng Slack.
+
+Tạo webserver:
+``` sh
+pip install flask
+mkdir flask
+cd flask
+wget https://github.com/anhbka/bka/blob/master/scrips/aodh-alarm.py
+chmod +x aodh-alarm.py
+cd
+export FLASK_APP=flask/aodh-alarm.py
+flask run --host=0.0.0.0 --port=5123
+```
+Trên controller chạy lệnh:
+
 ``` sh
 openstack alarm create \
 --name memory_hi \
@@ -29,7 +43,10 @@ openstack alarm create \
 --alarm-action 'http://192.168.239.135:5123/cpu' \
 --ok-action 'http://192.168.239.135:5123/cpu' \
 --resource-type instance \
---resource-id 299121bd-5ddb-4845-8afc-59b6a77d1cfa  
+--resource-id 299121bd-5ddb-4845-8afc-59b6a77d1cfa 
+
+Kết quả hiển thị trên Slack:
+ 
 ```
 
 <img src="/img/1.png">
